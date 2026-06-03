@@ -5,6 +5,7 @@ interface GeoInfo {
     asn: number;
     ip: string;
     country: string;
+    region: string;
     city: string;
     country_code: string;
 }

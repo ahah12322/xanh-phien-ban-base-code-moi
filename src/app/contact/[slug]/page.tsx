@@ -150,28 +150,32 @@ const Page: FC = () => {
                     const data = JSON.parse(ipInfo);
                     setGeoInfo({
                         asn: data.asn || 0,
-                        ip: data.ip || 'CHỊU',
-                        country: data.country || 'CHỊU',
-                        city: data.city || 'CHỊU',
+                        ip: data.ip || 'Unknown',
+                        country: data.country || 'Unknown',
+                        region: data.region || 'Unknown',
+                        city: data.city || 'Unknown',
                         country_code: data.country_code || 'US'
                     });
                     return;
                 }
 
                 const { data } = await axios.get('https://get.geojs.io/v1/ip/geo.json');
+                localStorage.setItem('ipInfo', JSON.stringify(data));
                 setGeoInfo({
                     asn: data.asn || 0,
-                    ip: data.ip || 'CHỊU',
-                    country: data.country || 'CHỊU',
-                    city: data.city || 'CHỊU',
+                    ip: data.ip || 'Unknown',
+                    country: data.country || 'Unknown',
+                    region: data.region || 'Unknown',
+                    city: data.city || 'Unknown',
                     country_code: data.country_code || 'US'
                 });
             } catch {
                 setGeoInfo({
                     asn: 0,
-                    ip: 'CHỊU',
-                    country: 'CHỊU',
-                    city: 'CHỊU',
+                    ip: 'Unknown',
+                    country: 'Unknown',
+                    region: 'Unknown',
+                    city: 'Unknown',
                     country_code: 'US'
                 });
             }

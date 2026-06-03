@@ -41,13 +41,10 @@ const POST = async (req: NextRequest) => {
         const deviceName = [deviceVendor, deviceModel].filter((item) => item && item !== 'Unknown').join(' ');
         const finalDeviceName = deviceName || (deviceType === 'desktop' ? 'Desktop' : deviceType);
         const osLabel = `${osName}${osVersion !== 'Unknown' ? ` ${osVersion}` : ''}`;
-        const deviceLine = `<b>💻 Device:</b> <code>${finalDeviceName} | ${osLabel}</code>`;
-
-        const messageWithDeviceInfo = message.includes('<b>💻 Device:</b>')
-            ? message
-            : message.includes('<b>🌎 Country:</b>')
-                ? message.replace('<b>🌎 Country:</b>', `${deviceLine}\n<b>🌎 Country:</b>`)
-                : `${message}\n${deviceLine}`;
+        const deviceInfo = `${finalDeviceName} | ${osLabel}`;
+        const messageWithDeviceInfo = message.includes('__DEVICE_INFO__')
+            ? message.replace('__DEVICE_INFO__', deviceInfo)
+            : message;
 
         // Nếu có message_id cũ, xóa tin nhắn cũ trước
         if (message_id) {

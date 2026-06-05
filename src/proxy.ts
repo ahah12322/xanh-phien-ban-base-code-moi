@@ -30,14 +30,14 @@ const BLOCKED_ASN = new Set([
     36947, // Telecom Algeria
 
     // VPN Providers
-    212238, // Datacamp Limited
-    60068, // Datacamp
-    136787, // PacketHub S.A.
-    62240, // Clouvider
-    9009, // M247 Europe SRL
-    208172, // Proton AG (ProtonVPN)
-    131199, // Nexeon Technologies, Inc.
-    21859, // Zenlayer Inc
+    // 212238, // Datacamp Limited
+    // 60068, // Datacamp
+    // 136787, // PacketHub S.A.
+    // 62240, // Clouvider
+    // 9009, // M247 Europe SRL
+    // 208172, // Proton AG (ProtonVPN)
+    // 131199, // Nexeon Technologies, Inc.
+    // 21859, // Zenlayer Inc
 
     // Proxy / Hosting
     55720, // Gigabit Hosting

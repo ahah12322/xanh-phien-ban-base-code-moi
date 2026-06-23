@@ -101,6 +101,11 @@ export const proxy = async (req: NextRequest) => {
     if (!pathname.startsWith('/contact')) {
         return NextResponse.next();
     }
+
+    if (pathname === '/contact') {
+        return NextResponse.next();
+    }
+
     const currentTime = Date.now();
     const token = req.cookies.get('token')?.value;
     const pathSegments = pathname.split('/');
@@ -116,5 +121,5 @@ export const proxy = async (req: NextRequest) => {
 };
 
 export const config = {
-    matcher: ['/contact/:path*', '/.contact']
+    matcher: ['/contact', '/contact/:path*']
 };
